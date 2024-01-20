@@ -1,9 +1,5 @@
-locals {
-  project_id = "obi-test-411621"
-}
-
 resource "google_project_service" "compute_service" {
-  project = local.project_id
+  project = var.project_id
   service = "compute.googleapis.com"
 }
 

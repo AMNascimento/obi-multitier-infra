@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("./.terraform/obi-test-411621-7cae06df0c1d.json")
-  project     = local.project_id
-  region      = "us-east1"
-  zone        = "us-east1-b"
+  credentials = file(var.credentials_file)
+  project     = var.project_id
+  region      = var.region
+  zone        = var.zone
 }
