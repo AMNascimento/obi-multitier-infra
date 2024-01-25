@@ -15,3 +15,13 @@ resource "google_cloud_run_v2_service" "obi_ui" {
   }
   depends_on = [google_project_service.services]
 }
+
+resource "google_compute_region_network_endpoint_group" "obi_ui_neg" {
+  for_each              = toset(var.locations_list)
+  name                  = "neg-${each.value}"
+  region                = each.value
+  network_endpoint_type = "SERVERLESS"
+  cloud_run {
+    service = google_cloud_run_v2_service.obi_ui[each.value].name
+  }
+}
